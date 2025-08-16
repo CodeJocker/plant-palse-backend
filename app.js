@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const routes = require("./routes/route.js");
+const { swaggerUi, specs } = require("./config/swagger.js");
 // Load environment variables
 dotenv.config();
 
@@ -26,7 +27,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// 4. Routes
+// 4. Swagger Documentation
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, {
+    explorer: true,
+    customCss: ".swagger-ui .topbar { display: none }",
+    customSiteTitle: "Plant Disease API Documentation",
+    swaggerOptions: {
+      docExpansion: "none",
+      filter: true,
+      showRequestDuration: true,
+    },
+  })
+);
+
+// 5. Routes
 app.use("/api", routes);
 
 // 5. Error handling middleware
