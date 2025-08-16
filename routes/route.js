@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const marketplaceRoutes = require("./MarketPlaceRoutes");
+const geminiRoutes = require("./GeminiRoutes");
 
 // Health check endpoint
 router.get("/health", (req, res) => {
@@ -14,6 +15,9 @@ router.get("/health", (req, res) => {
 // Marketplace routes
 router.use("/marketplace", marketplaceRoutes);
 
+// AI/Gemini routes
+router.use("/ai", geminiRoutes);
+
 // Default route for API documentation
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -24,6 +28,68 @@ router.get("/", (req, res) => {
       "A marketplace for plant disease medicines to help farmers and gardeners find treatments for diseases like Early Blight, Late Blight, and other plant diseases detected on leaves.",
     endpoints: {
       health: "GET /api/health",
+      ai: {
+        base: "/api/ai",
+        description:
+          "AI-powered plant disease diagnosis and recommendations using Gemini",
+        specialization:
+          "Tuned specifically for plant pathology, disease identification, and treatment recommendations",
+        endpoints: [
+          "POST /api/ai/prompt - General plant disease AI consultation",
+          "POST /api/ai/diagnose - Specialized disease diagnosis based on symptoms",
+          "POST /api/ai/treatment - Get treatment recommendations for specific diseases",
+          "POST /api/ai/prevention - Get prevention strategies for plant diseases",
+          "POST /api/ai/disease-info - Get comprehensive disease info from DL model detection",
+          "POST /api/ai/ai-treatment - Get treatment recommendations for DL detected disease",
+          "GET /api/ai/prompts - Get all prompts with pagination",
+          "GET /api/ai/prompts/:id - Get specific prompt by ID",
+          "DELETE /api/ai/prompts/:id - Delete prompt by ID",
+        ],
+        dlModelIntegration: {
+          description:
+            "Specialized endpoints for deep learning model integration",
+          workflow: [
+            "1. Frontend sends plant image to DL model",
+            "2. DL model returns disease name and confidence",
+            "3. Frontend sends disease name to /api/ai/disease-info",
+            "4. AI provides comprehensive disease information",
+            "5. Optional: Get specific treatment with /api/ai/ai-treatment",
+          ],
+          endpoints: {
+            diseaseInfo:
+              "POST /api/ai/disease-info - Requires: diseaseName, optional: plantType, confidence",
+            aiTreatment:
+              "POST /api/ai/ai-treatment - Requires: diseaseName, optional: plantType, confidence, severity, organicPreference",
+          },
+        },
+        expertiseAreas: [
+          "Disease identification and diagnosis",
+          "Treatment recommendations (organic & chemical)",
+          "Prevention strategies and best practices",
+          "Medicine and fungicide recommendations",
+          "Application methods and timing",
+          "Integrated pest management (IPM)",
+        ],
+        supportedDiseases: [
+          "Early Blight",
+          "Late Blight",
+          "Powdery Mildew",
+          "Downy Mildew",
+          "Black Spot",
+          "Rust",
+          "Anthracnose",
+          "Bacterial Wilt",
+          "Fusarium Wilt",
+          "Verticillium Wilt",
+          "Root Rot",
+          "Leaf Spot",
+          "Canker",
+          "Fire Blight",
+          "Scab",
+          "Mosaic Virus",
+          "and many others",
+        ],
+      },
       marketplace: {
         base: "/api/marketplace",
         description: "Plant Disease Medicine Marketplace",
