@@ -20,7 +20,7 @@ const {
  *   post:
  *     summary: General plant disease AI consultation
  *     description: Get expert AI advice on plant diseases with specialized prompting for plant pathology
- *     tags: [AI - General]
+ *     tags: [🤖 AI - General]
  *     requestBody:
  *       required: true
  *       content:
@@ -99,7 +99,7 @@ router.post("/prompt", promptGemini);
  *       - You have observed symptoms but no image analysis
  *       - You want expert confirmation of suspected disease
  *       - You need differential diagnosis between similar diseases
- *     tags: [AI - Specialized]
+ *     tags: [🩺 AI - Specialized]
  *     requestBody:
  *       required: true
  *       content:
@@ -188,7 +188,7 @@ router.post("/prevention", getPreventionStrategies);
  *       2. DL model returns disease name and confidence
  *       3. Frontend sends disease info to this endpoint
  *       4. AI provides comprehensive disease analysis
- *     tags: [AI - DL Integration]
+ *     tags: [🎯 AI - DL Integration (PRIMARY)]
  *     requestBody:
  *       required: true
  *       content:
@@ -275,7 +275,7 @@ router.post("/disease-info", getDiseaseInfo);
  *       - Location-specific advice
  *       - Marketplace medicine suggestions
  *       - Monitoring and follow-up guidance
- *     tags: [AI - DL Integration]
+ *     tags: [🎯 AI - DL Integration (PRIMARY)]
  *     requestBody:
  *       required: true
  *       content:
@@ -360,7 +360,7 @@ router.post("/ai-treatment", getTreatmentForDetectedDisease);
  *   get:
  *     summary: Get all AI prompts with pagination
  *     description: Retrieve all AI consultation history with filtering and pagination options
- *     tags: [AI - Data]
+ *     tags: [📊 AI - Data]
  *     parameters:
  *       - in: query
  *         name: page
@@ -439,7 +439,7 @@ router.get("/prompts", getAllPrompts);
  *   get:
  *     summary: Get a specific AI prompt by ID
  *     description: Retrieve detailed information about a specific AI consultation
- *     tags: [AI - Data]
+ *     tags: [📊 AI - Data]
  *     parameters:
  *       - in: path
  *         name: id
@@ -475,7 +475,7 @@ router.get("/prompts", getAllPrompts);
  *   delete:
  *     summary: Delete a specific AI prompt by ID
  *     description: Remove an AI consultation record from the database
- *     tags: [AI - Data]
+ *     tags: [📊 AI - Data]
  *     parameters:
  *       - in: path
  *         name: id
