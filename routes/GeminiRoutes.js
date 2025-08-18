@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const upload = multer(); 
 const {
   promptGemini,
   diagnosePlantDisease,
@@ -163,7 +165,7 @@ router.post("/prompt", promptGemini);
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 // POST /api/ai/diagnose - Specialized disease diagnosis
-router.post("/diagnose", diagnosePlantDisease);
+router.post("/diagnose", upload.single("image"), diagnosePlantDisease);
 
 // POST /api/ai/treatment - Get treatment recommendations for specific disease
 router.post("/treatment", getTreatmentRecommendations);

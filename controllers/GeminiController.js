@@ -207,7 +207,8 @@ const deletePrompt = async (req, res) => {
 // Specialized plant disease diagnosis function
 const diagnosePlantDisease = async (req, res) => {
   try {
-    const { symptoms, plantType, location, images } = req.body;
+    const { symptoms, plantType, location } = req.body;
+    const images = req.file;
 
     if (!symptoms || symptoms.trim().length === 0) {
       return sendErrorResponse(res, 400, "Disease symptoms are required");
