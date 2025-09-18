@@ -12,7 +12,8 @@ const app = express();
 // 1. CORS middleware should be first
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: "*",
+    // origin: process.env.CLIENT_URL || "*",
     credentials: true,
   })
 );
@@ -45,6 +46,10 @@ app.use(
 
 // 5. Routes
 app.use("/api", routes);
+app.get("/", (req, res) => {
+  console.log("Plant palse health check hit");
+  res.send("🌱 Plant Disease Detection Server is running ✅");
+});
 
 // 5. Error handling middleware
 app.use((err, req, res, next) => {
